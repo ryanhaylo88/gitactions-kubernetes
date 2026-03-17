@@ -1,0 +1,34 @@
+name: Local CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set APP_VERSION env
+        run: |
+          export APP_VERSION=${GITHUB_SHA::7}   # short commit hash
+          sed -i "s/value: \"v1\"/value: \"${APP_VERSION}\"/" k8s/deployment.yaml
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/python-api-app:latest .
+
+      - name: Push Docker image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/python-api-app:latest
+        env:
+          CR_PAT: ${{ secrets.GHCR_PAT }}
+
+      - name: Deploy to K8s
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl rollout status deployment/devops-app
