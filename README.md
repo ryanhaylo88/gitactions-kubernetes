@@ -72,7 +72,7 @@ flowchart LR
 ```
 
 ## Notes
-Uses self-hosted runner pointing to local MicroK8s kubeconfig
-NodePort is dynamic to avoid conflicts
-Cost-efficient portfolio project
+Uses self-hosted runner pointing to local MicroK8s kubeconfig  
+NodePort is dynamic to avoid conflicts  
+Cost-efficient portfolio project  
 
