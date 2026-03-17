@@ -33,3 +33,9 @@ jobs:
           kubectl apply --validate=false -f k8s/deployment.yaml
           kubectl apply --validate=false -f k8s/service.yaml
           kubectl rollout status deployment/api-app
+        
+      - name: Show NodePort
+        run: |
+          export KUBECONFIG=$HOME/.kube/config
+          NODE_PORT=$(kubectl get svc api-service -o jsonpath='{.spec.ports[0].nodePort}')
+          echo "App is available at http://<node-ip>:$NODE_PORT"
