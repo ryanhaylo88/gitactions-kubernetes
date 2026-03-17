@@ -1,8 +1,7 @@
-# DevOps Portfolio - Local K3s Deployment
+# Automated Kubernetes deployment via GitHub Actions
 
 ## Overview
 This project demonstrates a fully automated **local CI/CD pipeline** with:
-
 - **Docker** for containerization
 - **GitHub Actions** for automation
 - **MicroK8s** as a local Kubernetes cluster
