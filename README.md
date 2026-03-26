@@ -10,7 +10,7 @@ This project demonstrates a fully automated **local CI/CD pipeline** with:
 
 ## Technologies Used
 - Docker
-- Kubernetes (K3s)
+- Kubernetes (MicroK8s)
 - GitHub Actions
 - FastAPI (Python)
 
